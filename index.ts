@@ -1,39 +1,40 @@
-function superPrint<V>(a: V[]) {
-    return a[0]
+type Words = {
+    [key:string]: string
 }
 
-const a = superPrint<number>([1, 2, 3, 4])
-const b = superPrint([true, false, true])
-const c = superPrint(["a", "b", "c"])
-const d = superPrint([1, 2, true, false, "hello"])
-
-type Player<E> = {
-    name: string;
-    extraInfo: E;
-}
-
-type CarlExtra = {
-    favFood:string
-}
-
-type CarlPlayer = Player<CarlExtra>
-
-const carl: CarlPlayer = {
-    name:"carl",
-    extraInfo: {
-        favFood:"chicken"
+class Dict {
+    private words: Words
+    constructor(){
+        this.words = {}
+    }
+    add(word:Word){
+        if(this.words[word.term] === undefined){
+            this.words[word.term] = word.def
+        }
+    }
+    get(term:string){
+        return this.words[term]
+    }
+    delete(word:Word){
+        delete this.words[word.term]
+    }
+    update(word:Word){
+        if(this.words[word.term] !== undefined){
+            this.words[word.term] = word.def
+        }
+    }
+    showAll(word:Word){
+        console.log(Object.keys(this.words))
+    }
+    count(term:string){
+        const dictcount = Object.keys(this.words).length
+        return dictcount
     }
 }
 
-const lynn: Player<null> = {
-    name: "lynn",
-    extraInfo:null
-}
-
-type A = Array<number>
-
-let f:A = [1, 2, 3, 4]
-
-function printAllNumbers(arr: Array<number>){
-    
+class Word {
+    constructor(
+        public term:string,
+        public def:string
+    ){}
 }
