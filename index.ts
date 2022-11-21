@@ -1,40 +1,33 @@
-type Words = {
-    [key:string]: string
+interface User {
+    firstName:string,
+    lastName:string,
+    sayHi(name:string):string,
+    fullName():string
+}
+interface Human {
+    health:number
 }
 
-class Dict {
-    private words: Words
-    constructor(){
-        this.words = {}
-    }
-    add(word:Word){
-        if(this.words[word.term] === undefined){
-            this.words[word.term] = word.def
-        }
-    }
-    get(term:string){
-        return this.words[term]
-    }
-    delete(word:Word){
-        delete this.words[word.term]
-    }
-    update(word:Word){
-        if(this.words[word.term] !== undefined){
-            this.words[word.term] = word.def
-        }
-    }
-    showAll(word:Word){
-        console.log(Object.keys(this.words))
-    }
-    count(term:string){
-        const dictcount = Object.keys(this.words).length
-        return dictcount
-    }
-}
-
-class Word {
+class Player implements User, Human{
     constructor(
-        public term:string,
-        public def:string
-    ){}
+        public firstName:string,
+        public lastName:string,
+        public health:number
+    ) {}
+    fullName(){
+        return `${this.firstName} ${this.lastName}`
+    }
+    sayHi(name:string){
+        return `Hello ${name}. My name is ${this.fullName}.`
+    }
+}
+
+
+function makeUser(user: User): User{
+    return {
+        firstName:"carl",
+        lastName:"Lee",
+        fullName: () => "xx",
+        sayHi: (name) => "string"
+    }
 }
